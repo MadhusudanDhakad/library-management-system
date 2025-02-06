@@ -8,7 +8,7 @@ const TransactionsReport = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/transactions}`, {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/transactions`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         // const res = await axios.get("http://localhost:5000/api/transactions", {
