@@ -10,7 +10,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/users}`, {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/users`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         // const res = await axios.get("http://localhost:5000/api/users", {
@@ -24,7 +24,7 @@ const AdminDashboard = () => {
 
     const fetchBookRequests = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/books/requests}`, {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/books/requests`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         // const res = await axios.get("http://localhost:5000/api/books/requests", {
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
       }
 
       await axios.post(
-        `${process.env.REACT_APP_BASE_URL/api/books/issue}`,
+        `${process.env.REACT_APP_BASE_URL}/api/books/issue`,
         { requestId, bookId, userId },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
       toast.success("Book issued successfully!");
 
       // Refresh book requests after issuing a book
-      const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/books/requests}`, {
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/books/requests`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       // const res = await axios.get("http://localhost:5000/api/books/requests", {
