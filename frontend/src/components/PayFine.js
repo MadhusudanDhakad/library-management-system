@@ -37,9 +37,12 @@ const PayFine = ({ transactionId }) => {
 
   const onSubmit = async (values) => {
     try {
-      await axios.put(`http://localhost:5000/api/transactions/${transactionId}/payfine`, values, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/transactions/${transactionId}/payfine`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+      // await axios.put(`http://localhost:5000/api/transactions/${transactionId}/payfine`, values, {
+      //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      // });
       toast.success("Fine paid successfully!");
     } catch (err) {
       toast.error("Error paying fine. Please try again.");
