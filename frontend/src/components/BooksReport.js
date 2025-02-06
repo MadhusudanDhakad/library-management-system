@@ -8,7 +8,7 @@ const BooksReport = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/books}`, {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/books`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         // const res = await axios.get("http://localhost:5000/api/books", {
