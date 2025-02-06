@@ -1,45 +1,37 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 
-const BookSchema = new mongoose.Schema({
-    bookName:{
-        type:String,
-        require:true
+const bookSchema = new mongoose.Schema({
+    title: { 
+        type: String, 
+        required: true 
     },
-    alternateTitle:{
-        type:String,
-        default:""
+    author: {
+         type: String, 
+         required: true 
     },
-    author:{
-        type:String,
-        require:true
+    type: { 
+        type: String, 
+        enum: ["fiction", "non-fiction", "self-help", "education-academic", "poetry-drama", "childrens-youth", "comic-graphic"], 
+        default: "fiction" 
     },
-    language:{
-        type:String,
-        default:""
+    serialNo: {
+         type: String, 
+         required: true, 
+         unique: true 
     },
-    publisher:{
-        type:String,
-        default:""
+    isAvailable: { 
+        type: Boolean, 
+        default: true 
     },
-    bookCountAvailable:{
-        type:Number,
-        require:true
+    requestedBy: {
+         type: mongoose.Schema.Types.ObjectId, 
+         ref: "User" 
     },
-    bookStatus:{
-        type:String,
-        default:"Available"
+    issuedTo: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "User" 
     },
-    categories:[{ 
-        type: mongoose.Types.ObjectId, 
-        ref: "BookCategory" 
-    }],
-    transactions:[{
-        type:mongoose.Types.ObjectId,
-        ref:"BookTransaction"
-    }]
-},
-{
-    timestamps:true
-})
+  });
 
-export default mongoose.model("Book",BookSchema)
+module.exports = mongoose.model("Book", bookSchema)
+
