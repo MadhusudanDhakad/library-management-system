@@ -8,7 +8,7 @@ const Books = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/books}`, {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/books`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         // const res = await axios.get("http://localhost:5000/api/books", {
@@ -26,7 +26,7 @@ const Books = () => {
   const requestBook = async (bookId) => {
     try {
       await axios.post(
-        `${process.env.REACT_APP_BASE_URL/api/books/request}`,
+        `${process.env.REACT_APP_BASE_URL}/api/books/request`,
         { bookId },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
