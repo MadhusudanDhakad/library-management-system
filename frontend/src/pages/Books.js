@@ -8,9 +8,12 @@ const Books = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/books", {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/books}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
+        // const res = await axios.get("http://localhost:5000/api/books", {
+        //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        // });
         setBooks(res.data);
       } catch (err) {
         toast.error("Error fetching books. Please try again.");
@@ -23,10 +26,15 @@ const Books = () => {
   const requestBook = async (bookId) => {
     try {
       await axios.post(
-        "http://localhost:5000/api/books/request",
+        `${process.env.REACT_APP_BASE_URL/api/books/request}`,
         { bookId },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
+      // await axios.post(
+      //   "http://localhost:5000/api/books/request",
+      //   { bookId },
+      //   { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+      // );
       toast.success("Book requested successfully!");
     } catch (err) {
       toast.error(err.response?.data?.error || "Error requesting book.");

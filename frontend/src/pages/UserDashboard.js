@@ -9,9 +9,12 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/books", {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/books}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
+        // const res = await axios.get("http://localhost:5000/api/books", {
+        //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        // });
         setBooks(res.data);
       } catch (err) {
         toast.error("Error fetching books. Please try again.");
@@ -20,9 +23,12 @@ const UserDashboard = () => {
 
     const fetchIssuedBooks = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/users/me", {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/users/me}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
+        // const res = await axios.get("http://localhost:5000/api/users/me", {
+        //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        // });
         console.log("Fetched user data: ", res.data);
         setIssuedBooks(res.data.issuedBooks || []);
       } catch (err) {
@@ -38,10 +44,15 @@ const UserDashboard = () => {
   const handleRequestBook = async (bookId) => {
     try {
       await axios.post(
-        "http://localhost:5000/api/books/request",
+        `${process.env.REACT_APP_BASE_URL/api/books/request}`,
         { bookId },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
+      // await axios.post(
+      //   "http://localhost:5000/api/books/request",
+      //   { bookId },
+      //   { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+      // );
       toast.success("Book requested successfully!");
     } catch (err) {
       console.error("Error requesting book:", err.response ? err.response.data : err.message);

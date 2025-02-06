@@ -17,9 +17,12 @@ const UpdateMembership = () => {
 
   const onSubmit = async (values) => {
     try {
-      await axios.put("http://localhost:5000/api/membership/update", values, {
+      await axios.put(`${process.env.REACT_APP_BASE_URL/api/membership/update}`, values, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
+      // await axios.put("http://localhost:5000/api/membership/update", values, {
+      //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      // });
       toast.success("Membership updated successfully!");
     } catch (err) {
       toast.error("Error updating membership. Please try again.");

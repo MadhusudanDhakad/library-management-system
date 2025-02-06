@@ -22,9 +22,12 @@ const UpdateUser = () => {
 
   const onSubmit = async (values) => {
     try {
-      await axios.put(`http://localhost:5000/api/users/${userId}`, values, {
+      await axios.put(`${process.env.REACT_APP_BASE_URL}/api/transactions/${userId}`, values, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
+      // await axios.put(`http://localhost:5000/api/users/${userId}`, values, {
+      //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      // });
       toast.success("User updated successfully!");
     } catch (err) {
       toast.error("Error updating user. Please try again.");
@@ -34,9 +37,12 @@ const UpdateUser = () => {
   const fetchUser = async () => {
     if (!userId) return;
     try {
-      const res = await axios.get(`http://localhost:5000/api/users/${userId}`, {
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/transactions/${userId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
+      // const res = await axios.get(`http://localhost:5000/api/users/${userId}`, {
+      //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      // });
       setUser(res.data);
     } catch (err) {
       toast.error("Error fetching user. Please try again.");

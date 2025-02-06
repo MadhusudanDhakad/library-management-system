@@ -10,9 +10,12 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/users", {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/users}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
+        // const res = await axios.get("http://localhost:5000/api/users", {
+        //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        // });
         setUsers(res.data);
       } catch (err) {
         toast.error("Error fetching users. Please try again.");
@@ -21,9 +24,12 @@ const AdminDashboard = () => {
 
     const fetchBookRequests = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/books/requests", {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/books/requests}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
+        // const res = await axios.get("http://localhost:5000/api/books/requests", {
+        //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        // });
         setBookRequests(res.data);
       } catch (err) {
         toast.error("Error fetching book requests. Please try again.");
@@ -43,16 +49,24 @@ const AdminDashboard = () => {
       }
 
       await axios.post(
-        "http://localhost:5000/api/books/issue",
+        `${process.env.REACT_APP_BASE_URL/api/books/issue}`,
         { requestId, bookId, userId },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
+      // await axios.post(
+      //   "http://localhost:5000/api/books/issue",
+      //   { requestId, bookId, userId },
+      //   { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+      // );
       toast.success("Book issued successfully!");
 
       // Refresh book requests after issuing a book
-      const res = await axios.get("http://localhost:5000/api/books/requests", {
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL/api/books/requests}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
+      // const res = await axios.get("http://localhost:5000/api/books/requests", {
+      //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      // });
       setBookRequests(res.data);
     } catch (err) {
       console.log("Error issuing book: ", err);

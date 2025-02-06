@@ -27,9 +27,12 @@ const AddUser = () => {
       // await axios.post("http://localhost:5000/api/auth/register", values, {
       //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       // });
-      await axios.post("http://localhost:5000/api/auth/register", values, {
+      await axios.post(`${process.env.REACT_APP_BASE_URL/api/auth/register}`, values, {
         headers: { "Content-Type": "application/json" },
       });
+      // await axios.post("http://localhost:5000/api/auth/register", values, {
+      //   headers: { "Content-Type": "application/json" },
+      // });
       toast.success("User added successfully!");
       navigate("/login");
     } catch (err) {
