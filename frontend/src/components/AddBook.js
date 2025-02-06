@@ -23,7 +23,7 @@ const AddBook = () => {
 
   const onSubmit = async (values) => {
     try {
-      await axios.post(process.env.REACT_APP_BASE_URL, values, {
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/api/books`, values, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       // await axios.post("http://localhost:5000/api/books", values, {
