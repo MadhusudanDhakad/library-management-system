@@ -19,7 +19,7 @@ const Login = ({ onLogin }) => {
 
   const onSubmit = async (values) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_BASE_URL/api/auth/login}`, values);
+      const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, values);
       // const res = await axios.post("http://localhost:5000/api/auth/login", values);
       localStorage.setItem("token", res.data.token);
       // navigate(res.data.role === "admin" ? "/admin-dashboard" : "/books");
