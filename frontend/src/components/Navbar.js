@@ -14,7 +14,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/", { replace: true });  // Ensure navigation resets state
-    // window.location.reload();  // Force a reload to reset state
+    window.location.reload();  // Force a reload to reset state
   };
 
   return (
