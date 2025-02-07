@@ -66,57 +66,92 @@ const App = () => {
     };
   }, []);
 
-  return (
+    return (
     <>
       <ToastContainer />
-      {/* <Navbar onLogout={handleLogout} /> */}
       {showNavbar && <Navbar onLogout={handleLogout} />}
 
-      {/* Show Dashboard only if no one is logged in */}
-      {!role ? (
-        <>
-          {/* <Dashboard /> */}
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            <Route path="/register" element={<AddUser />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </>
-      ) : (
-        <>
-          <Routes>
-            <Route path="/" element={<AddUser />} />
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/register" element={<AddUser />} />
+        
+        {/* Role-based protected routes */}
+        {role === "user" && (
+          <>
+            <Route path="/user-dashboard" element={<UserDashboard />} />
             <Route path="/books" element={<Books />} />
             <Route path="/transactions" element={<Transactions />} />
-            <Route path="/membership" element={<Membership />} />
+            <Route path="/memberships" element={<Membership />} />
+          </>
+        )}
 
-            {/* Role-based access */}
-            {/* <Route path="/login" element={<Login />} /> */}
-            <Route
-              path="/user-dashboard"
-              element={role === "user" ? <UserDashboard /> : <Navigate to="/books" />}
-            />
-            <Route 
-              path="/admin-dashboard" 
-              element={role === "admin" ? <AdminDashboard /> : <Navigate to="/books" />} 
-            />
-            <Route
-              path="/add-book"
-              element={role === "admin" ? <AddBook /> : <Navigate to="/books" />}
-            />
-            <Route
-              path="/reports"
-              element={role === "admin" ? <Reports /> : <Navigate to="/books" />}
-            />
+        {role === "admin" && (
+          <>
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/add-book" element={<AddBook />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/books" element={<Books />} />
+          </>
+        )}
 
-            {/* Redirect unknown routes */}
-            <Route path="*" element={<Navigate to="/books" />} />
-          </Routes>
-        </>
-      )}
+        {/* Redirect to dashboard based on role */}
+        <Route path="*" element={<Navigate to={role ? (role === "admin" ? "/admin-dashboard" : "/user-dashboard") : "/"} />} />
+      </Routes>
     </>
   );
+
+  // return (
+  //   <>
+  //     <ToastContainer />
+  //     {/* <Navbar onLogout={handleLogout} /> */}
+  //     {showNavbar && <Navbar onLogout={handleLogout} />}
+
+  //     {/* Show Dashboard only if no one is logged in */}
+  //     {!role ? (
+  //       <>
+  //         {/* <Dashboard /> */}
+  //         <Routes>
+  //           <Route path="/" element={<Dashboard />} />
+  //           <Route path="/login" element={<Login onLogin={handleLogin} />} />
+  //           <Route path="/register" element={<AddUser />} />
+  //           <Route path="*" element={<Navigate to="/" />} />
+  //         </Routes>
+  //       </>
+  //     ) : (
+  //       <>
+  //         <Routes>
+  //           <Route path="/" element={<AddUser />} />
+  //           <Route path="/books" element={<Books />} />
+  //           <Route path="/transactions" element={<Transactions />} />
+  //           <Route path="/membership" element={<Membership />} />
+
+  //           {/* Role-based access */}
+  //           {/* <Route path="/login" element={<Login />} /> */}
+  //           <Route
+  //             path="/user-dashboard"
+  //             element={role === "user" ? <UserDashboard /> : <Navigate to="/books" />}
+  //           />
+  //           <Route 
+  //             path="/admin-dashboard" 
+  //             element={role === "admin" ? <AdminDashboard /> : <Navigate to="/books" />} 
+  //           />
+  //           <Route
+  //             path="/add-book"
+  //             element={role === "admin" ? <AddBook /> : <Navigate to="/books" />}
+  //           />
+  //           <Route
+  //             path="/reports"
+  //             element={role === "admin" ? <Reports /> : <Navigate to="/books" />}
+  //           />
+
+  //           {/* Redirect unknown routes */}
+  //           <Route path="*" element={<Navigate to="/books" />} />
+  //         </Routes>
+  //       </>
+  //     )}
+  //   </>
+  // );
 };
 
 export default App;
