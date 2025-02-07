@@ -13,7 +13,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="bg-gray-500 min-h-screen flex items-center justify-center p-6">
+    <div className="bg-gradient-to-r from-blue-100 to-blue-300 min-h-screen flex items-center justify-center p-6">
       <div className="bg-gray-200 p-8 rounded-lg shadow-lg w-full max-w-md text-center">
         <h1 className="text-3xl font-extrabold text-gray-800 mb-6">
           Welcome to the Library Management System!
