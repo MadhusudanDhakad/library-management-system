@@ -6,6 +6,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const role = token ? JSON.parse(atob(token.split(".")[1])).role : null;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // const handleLogout = () => {
   //   localStorage.removeItem("token");
