@@ -50,6 +50,9 @@ const Navbar = () => {
                   <Link to="/reports" className="block md:inline hover:text-gray-400">Reports</Link>
                 </>
               )}
+             {role === "user" && (
+                <Link to="/memberships" className="block md:inline hover:text-gray-100">Membership</Link>
+              )}
               <button onClick={handleLogout} className="block md:inline hover:text-gray-100">Logout</button>
             </>
           )}
