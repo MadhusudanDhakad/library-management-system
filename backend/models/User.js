@@ -15,16 +15,16 @@ const userSchema = new mongoose.Schema({
     enum: ["admin", "user"], 
     default: "user" 
 },
-  // membership: {
-  //   type: { 
-  //       type: String, 
-  //       enum: ["6 months", "1 year", "2 years"], 
-  //       default: "6 months" 
-  //   },
-  //   expiryDate: { 
-  //       type: Date 
-  //   },
-  // },
+  membership: {
+    type: { 
+        type: String, 
+        enum: ["6 months", "1 year", "2 years"], 
+        default: "6 months" 
+    },
+    expiryDate: { 
+        type: Date 
+    },
+  },
   // permissions: [{ type: String }],
   // isAdmin: {
     //   type: String,
